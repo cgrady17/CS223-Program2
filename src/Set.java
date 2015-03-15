@@ -47,21 +47,39 @@ public class Set <E extends Comparable<E>> {
         // Add item to set if not in the set
         // Maintain a sorted order without the use of a sort algorithm
 
+        if (size > 0) {
+            E[] data2 = (E[]) new Comparable[size + 1];
+            int p = -1;
+            //p = Arrays.binarySearch(data, item);
+            if (p < 0) {
+                p = -p - 1;
+                System.arraycopy(data, 0, data2, 0, p);
+                System.arraycopy(data, p, data2, p + 1, data.length - p);
+                data2[p] = item;
+                size++;
+            }
 
-        /*if (item.compareTo()) {
-
-        }*/
-
-        E[] data2 = (E[]) new Comparable[data.length + 1];
-        int p = Arrays.binarySearch(data, item);
-        if (p < 0) {
-            p = -p - 1;
-            System.arraycopy(data, 0, data2, 0, p);
-            System.arraycopy(data, p, data2, p + 1, data.length - p);
-            data2[p] = item;
+            data = data2;
+        } else {
+            data[0] = item;
+            size++;
         }
 
-        data = data2;
+
+        /*int i = 0;
+        while (i < size) {
+            if (item.compareTo(data[i]) < 0 ) {
+                i++;
+            }
+        }
+        if (i < data.length) {
+            for (int j = data.length-1; j > i; j--) {
+                data[j] = data[j -1];
+            }
+            data[i] = item;
+            size++;
+        }*/
+
     }
 
     public E get(int i) {
@@ -94,9 +112,20 @@ public class Set <E extends Comparable<E>> {
             return obj;
         } else {
             // Throw?
-            return (E) new NoSuchElementException();
+            throw new NoSuchElementException();
         }
+    }
 
+    public E remove(int index) {
+        E obj = data[index];
+        data[index] = null;
+        // Need to rewrite to shift objects over
+        // Can't leave empty object in array
+        if (obj != null) {
+            return obj;
+        } else {
+            throw new NoSuchElementException();
+        }
     }
 
     public int indexOf(E target) {
@@ -120,15 +149,3 @@ public class Set <E extends Comparable<E>> {
         return -1;
     }
 }
-
-/**
- * SI { 2, 4, 5}
- * Set parse(String s) {
- *     name =
- *     Set<Integer> set = ....
- *     while (true) {
- *     set.add(x);
- *     }
- *     return set;
- * }
- */
