@@ -148,4 +148,19 @@ public class Set <E extends Comparable<E>> {
         }
         return -1;
     }
+
+    public int size() {
+        return this.data.length;
+    }
+
+    public String toString() {
+        // Return a String representation of the set
+        StringBuilder s = new StringBuilder();
+        s.append(this.name + ":{");
+        for (E obj : this.data) {
+            s.append(obj + ",");
+        }
+        s.append("}");
+        return String.valueOf(s);
+    }
 }

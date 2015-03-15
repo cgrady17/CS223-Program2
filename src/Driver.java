@@ -76,13 +76,15 @@ public class Driver {
                         // User specified a setname
 
                     } else {
-                        // User did not specify setname, display all sets
+                        // User did not specify a setname, list all sets
+                        StringBuilder strBuilder = new StringBuilder();
                         for (Set set : setColl) {
-
+                            strBuilder.append(set.toString() + ",");
                         }
+                        System.out.println(String.valueOf(strBuilder));
                     }
-                } else {
-                    cont = false;
+                }
+                else {
                     System.out.println("Error: Invalid Command");
                 }
             }
