@@ -149,6 +149,19 @@ public class Set <E extends Comparable<E>> {
         return -1;
     }
 
+    public boolean equals(Set<E> s) {
+        if (size != s.size()) {
+            return false;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (data[i] != s.get(i)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public int size() {
         return this.data.length;
     }
