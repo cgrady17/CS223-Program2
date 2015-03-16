@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
  *  Similar to ArrayList, except it maintains sorted order of elements where
  *  the first element is smallest, last is largest. Additionally, no duplicates
  *  allowed. Supports: union, subtract, difference, and intersect.
+ *
+ *  Due: 3/15/15 @ 11:59 PM | Extended to: 3/20/15 @ 11:59 PM
  */
 public class Set <E extends Comparable<E>> {
     /**
