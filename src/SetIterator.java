@@ -111,6 +111,10 @@ public class SetIterator<E extends ListIterator<E> & Comparable<E>> {
         thisSet.remove(index);
         // Add the specified object to the Set
         // The Set will handle sorting
-        thisSet.add(item);
+        try {
+            thisSet.add(item);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 }

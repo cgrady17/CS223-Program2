@@ -72,8 +72,10 @@ public class Set <E extends Comparable<E>> {
      * Add the specified item to the Set while maintaining value order
      * @param item The object to add to the Set
      */
-    public void add (E item) {
+    public void add (E item) throws Exception {
         if (size > 0) {
+            /* FIRST ATTEMPT
+
             E[] data2 = (E[]) new Comparable[size + 1];
             int p = -1;
             //p = Arrays.binarySearch(data, item);
@@ -84,28 +86,49 @@ public class Set <E extends Comparable<E>> {
                 data2[p] = item;
                 size++;
             }
+            data = data2;*/
 
-            data = data2;
+            // SECOND ATTEMPT
+            for (int i = 0; i < size; i++) {
+                if (data[i].compareTo(item) < 0) {
+                    // Current element is less than item
+                    // Add item after element
+                    E obj = data[i+1];
+                    data[i+1] = item;
+                    // Declare tmp to the current index
+                    int tmp = i + 1;
+                    // Loop to move elements right
+                    while (tmp < size) {
+                        // Element at current tmp is replaced by element at tmp + 1
+                        data[tmp] = data[tmp+1];
+                        // Step tmp by one
+                        tmp++;
+                    }
+                    size++;
+                } else if (data[i].compareTo(item) > 0) {
+                    // Current element is greater than item
+                    // Add item before element
+                    E obj = data[i+1];
+                    data[i+1] = item;
+                    // Declare tmp to the current index
+                    int tmp = i - 1;
+                    // Loop to move elements right
+                    while (tmp < size) {
+                        // Element at current tmp is replaced by element at tmp + 1
+                        data[tmp] = data[tmp+1];
+                        // Step tmp by one
+                        tmp++;
+                    }
+                    size++;
+                } else {
+                    // Current element is same as item, Don't add
+                    throw new Exception("Specified element already exists");
+                }
+            }
         } else {
             data[0] = item;
             size++;
         }
-
-
-        /*int i = 0;
-        while (i < size) {
-            if (item.compareTo(data[i]) < 0 ) {
-                i++;
-            }
-        }
-        if (i < data.length) {
-            for (int j = data.length-1; j > i; j--) {
-                data[j] = data[j -1];
-            }
-            data[i] = item;
-            size++;
-        }*/
-
     }
 
     /**
@@ -222,7 +245,11 @@ public class Set <E extends Comparable<E>> {
      */
     public Set<E> union(Set<E> s) {
         for (int i = 0; i < size; i++) {
-            s.add(data[i]);
+            try {
+                s.add(data[i]);
+            } catch (Exception e) {
+                e.getMessage();
+            }
         }
         return s;
     }
@@ -252,7 +279,11 @@ public class Set <E extends Comparable<E>> {
             if (data[i].equals(s.get(i))) {
                 s.remove(i);
             } else {
-                s.add(data[i]);
+                try {
+                    s.add(data[i]);
+                } catch (Exception e) {
+                    e.getMessage();
+                }
             }
         }
         return s;
@@ -268,7 +299,11 @@ public class Set <E extends Comparable<E>> {
             if (data[i].equals(s.get(i))) {
                 s.remove(i);
             } else {
-                s.add(data[i]);
+                try {
+                    s.add(data[i]);
+                } catch (Exception e) {
+                    e.getMessage();
+                }
             }
         }
         return s;

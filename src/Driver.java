@@ -168,24 +168,97 @@ public class Driver {
                      * @param setname1 The name of the first desired Set
                      * @param setname2 The name of the second desired Set
                      */
+                    // Create temp set1 initialized to null
+                    Set set1 = null;
+                    // Create temp set2 initialized to null
+                    Set set2 = null;
+                    // Iterate over the Set collection
+                    for (Set set : setColl) {
+                        // Find the Set matching the first desired Set
+                        if (set.getName().equals(tokens[1])) {
+                            // Set set1 to the found Set
+                            set1 = set;
+                            // Find the Set matching the second desired Set
+                        } else if (set.getName().equals(tokens[2])) {
+                            // Set set2 to the found Set
+                            set2 = set;
+                        }
+                    }
+                    Set tmpSet = set1.intersect(set2);
+                    System.out.println(tmpSet.toString());
+
                 } else if (command.equals("union")) {
                     /**
                      * Displays the union of the two argued sets
                      * @param setname1 The name of the first desired Set
                      * @param setname2 The name of the second desired Set
                      */
+                    // Create temp set1 initialized to null
+                    Set set1 = null;
+                    // Create temp set2 initialized to null
+                    Set set2 = null;
+                    // Iterate over the Set collection
+                    for (Set set : setColl) {
+                        // Find the Set matching the first desired Set
+                        if (set.getName().equals(tokens[1])) {
+                            // Set set1 to the found Set
+                            set1 = set;
+                            // Find the Set matching the second desired Set
+                        } else if (set.getName().equals(tokens[2])) {
+                            // Set set2 to the found Set
+                            set2 = set;
+                        }
+                    }
+                    Set tmpSet = set1.union(set2);
+                    System.out.println(tmpSet.toString());
                 } else if (command.equals("subtract")) {
                     /**
                      * Displays the subraction of the two argued sets
                      * @param setname1 The name of the first desired Set
                      * @param setname2 The name of the second desired Set
                      */
+                    // Create temp set1 initialized to null
+                    Set set1 = null;
+                    // Create temp set2 initialized to null
+                    Set set2 = null;
+                    // Iterate over the Set collection
+                    for (Set set : setColl) {
+                        // Find the Set matching the first desired Set
+                        if (set.getName().equals(tokens[1])) {
+                            // Set set1 to the found Set
+                            set1 = set;
+                            // Find the Set matching the second desired Set
+                        } else if (set.getName().equals(tokens[2])) {
+                            // Set set2 to the found Set
+                            set2 = set;
+                        }
+                    }
+                    Set tmpSet = set1.subtract(set2);
+                    System.out.println(tmpSet.toString());
                 } else if (command.equals("difference")) {
                     /**
                      * Displays the difference of the two argued sets
                      * @param setname1 The name of the first desired Set
                      * @param setname2 The name of the second desired Set
                      */
+                    // Create temp set1 initialized to null
+                    Set set1 = null;
+                    // Create temp set2 initialized to null
+                    Set set2 = null;
+                    // Iterate over the Set collection
+                    for (Set set : setColl) {
+                        // Find the Set matching the first desired Set
+                        if (set.getName().equals(tokens[1])) {
+                            // Set set1 to the found Set
+                            set1 = set;
+                            // Find the Set matching the second desired Set
+                        } else if (set.getName().equals(tokens[2])) {
+                            // Set set2 to the found Set
+                            set2 = set;
+                        }
+                    }
+                    Set tmpSet = set1.difference(set2);
+                    System.out.println(tmpSet.toString());
                 } else if (command.equals("find")) {
                     /**
                      * Finds the argued object in the Set with the argued name and writes the
@@ -323,7 +396,7 @@ public class Driver {
         String setName = commArgs[0];
         // Create new empty Set
         Set<Integer> set = new Set<Integer>(setName);
-        // Create String Tokenizer with the second elemetn int he commArgs array
+        // Create String Tokenizer with the second element int he commArgs array
         StringTokenizer tokenizer = new StringTokenizer(commArgs[1]);
         // While the tokenizer has more tokens...
         while (tokenizer.hasMoreTokens()) {
@@ -338,6 +411,11 @@ public class Driver {
                 /**
                  * We're here if the token could not be parsed to an Int
                  * We do nothing because we only want to add Integers to the Set
+                 */
+            } catch (Exception e) {
+                /**
+                 * We're here because the element already exists!
+                 * We'll just skip the addition of the element by doing nothing here
                  */
             }
         }
